@@ -20,6 +20,7 @@ import { UserAuthContextProvider } from "./contexts/UserAuthContext";
 import Rooms from "./pages/Rooms";
 import SingleRooms from "./pages/SingleRooms";
 import Booknow from "./pages/Booknow";
+import Footer from "./Components/Footer";
 
 function App() {
   const [hotel, setHotels] = useState([]);
@@ -81,6 +82,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<Error />} />
           </Routes>
+          <Footer />
         </UserAuthContextProvider>
       </BrowserRouter>
     </div>
