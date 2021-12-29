@@ -51,7 +51,7 @@ const Bookings = () => {
           </thead>
           <tbody>
             {bookings.map((booking) => (
-              <tr>
+              <tr key={booking.id}>
                 <>
                   <td>{booking.id}</td>
                   <td>{booking.type.toUpperCase()}</td>

@@ -3,19 +3,20 @@ import React from "react";
 import RoomsList from "./RoomsList";
 import Loading from "./Loading";
 import { useSelector } from "react-redux";
+import RoomsFilter from "./RoomsFilter";
 
 export default function RoomsContainer() {
-  const state = useSelector((state) => state);
 
+  const state = useSelector((state) => state);
   return (
     <>
       {state.length > 0 ? (
-        <RoomsList rooms={state[0].sortedRooms} />
-      ) : (
         <>
-          {/* <RoomsFilter rooms={state.rooms} /> */}
+        <RoomsFilter rooms={state[0].rooms} />
+          <RoomsList rooms={state[0].sortedRooms} />
+          </>
+      ) : (
           <Loading />
-        </>
       )}
     </>
   );
