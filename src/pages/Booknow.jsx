@@ -8,13 +8,15 @@ import { db } from "../firebase";
 import { uid } from "uid";
 import { useSelector } from "react-redux";
 import { useUserAuth } from "../contexts/UserAuthContext";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 
-export default function Booknow(props) {
+export default function Booknow() {
   const { user } = useUserAuth();
   const state = useSelector((state) => state);
   const { slug } = useParams();
   const [fullNmae, setFullNmae] = useState("");
-  const [phone, setPhone] = useState(0);
+  const [value, setValue] = useState(0);
   const [cnic, setCnic] = useState(0);
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
@@ -43,9 +45,7 @@ export default function Booknow(props) {
     setStartDate(date);
   }
 
-  function handlePhone(val) {
-    setPhone(val.target.value);
-  }
+
   function handleChangeEnd(date) {
     setEndDate(date);
   }
@@ -120,7 +120,7 @@ export default function Booknow(props) {
       address &&
       cnic &&
       email &&
-      phone &&
+      value &&
       persons <= capacity &&
       startDate &&
       endDate
@@ -130,7 +130,7 @@ export default function Booknow(props) {
         address: address,
         cnic: cnic,
         email: email,
-        phone: phone,
+        phone: value,
         persons: persons,
         type: name,
         startDate: formattedDate,
@@ -149,7 +149,7 @@ export default function Booknow(props) {
       setAddress("");
       setCnic(0);
       setEmail("");
-      setPhone(0);
+      setValue(0);
       setPersons(0);
     } else {
       alert("Please Fill all fields");
@@ -272,16 +272,15 @@ export default function Booknow(props) {
                       required
                     />
                     <label htmlFor="Number">Number</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={phone}
-                      onChange={handlePhone}
+                    <PhoneInput
+                      defaultCountry="PK"
+                      className="phoneInput"
                       id="number"
-                      required
-                      placeholder="Enter your Phone number"
-                      maxLength={11}
+                      placeholder="Enter phone number"
+                      value={value}
+                      onChange={setValue}
                     />
+
                     <label htmlFor="CNIC">CNIC Number</label>
                     <input
                       type="number"

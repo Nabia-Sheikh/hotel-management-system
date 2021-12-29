@@ -64,6 +64,19 @@ h6 {
   text-transform: uppercase;
   cursor: pointer;
 }
+
+.phoneInput {
+  margin-bottom: 10px;
+}
+label {
+  margin-top: 10px;
+}
+
+.phoneInput input{
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
 .btn-warning {
   display: inline-block;
   text-decoration: none;
@@ -141,7 +154,7 @@ h6 {
 }
 .nav-link:hover {
   color: white;
-  transform: scale(1.1) ;
+  transform: scale(1.1);
 }
 .nav-link.active_class {
   color: #ffffff;
@@ -176,14 +189,15 @@ input[type="number"]:focus,
 .defaultHero,
 .roomsHero {
   min-height: calc(100vh - 0px);
-  background: url("./images/defaultBcg.jpg") center/cover no-repeat;
+  background: url("https://vistapointe.net/images/hotel-1.jpg")
+    center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 .roomsHero {
-  background-image: url("./images/room-2.jpg");
+  background-image: url("https://www.berjayahotel.com/sites/default/files/colombo_30.jpg");
   min-height: calc(100vh - 0px);
 }
 .singleRoom {

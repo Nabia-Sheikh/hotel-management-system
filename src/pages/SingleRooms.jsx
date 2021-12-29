@@ -12,7 +12,8 @@ const SingleRooms = () => {
     const idiRooms = state[0].rooms.map((item) => item);
     const roomDatas = idiRooms.filter((roomItem) => roomItem.slug === arg);
     return roomDatas;
-  }
+    }
+    
 
   const roomData = getRoom(slug);
   const name = roomData[0].name;

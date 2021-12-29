@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaCocktail, FaHiking, FaShuttleVan, FaBeer } from "react-icons/fa";
 import Title from './Title';
 
 const Services = () => {
-    const [service, setService] = useState({
+    const service = {
       services: [
         {
           icon: <FaCocktail />,
@@ -26,7 +26,7 @@ const Services = () => {
           info: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur",
         },
       ],
-    });
+    };
     return (
       <div className="container-fluid services">
         <Title title="Services" />
