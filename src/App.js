@@ -1,5 +1,5 @@
 import { child, get, ref } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
@@ -23,10 +23,7 @@ import Booknow from "./pages/Booknow";
 import Footer from "./Components/Footer";
 
 function App() {
-  const [hotel, setHotels] = useState([]);
   const dispatch = useDispatch();
-
-  
 
   function readFromDatabase() {
     const dbRef = ref(db);
@@ -34,9 +31,7 @@ function App() {
       .then((snapshot) => {
         if (snapshot.exists()) {
           const data = snapshot.val();
-          setHotels(data);
           dispatch(ReadFromFirebase(data));
-
         } else {
           console.log("no data");
         }
@@ -51,6 +46,7 @@ function App() {
       await readFromDatabase();
     }
     start();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // useEffect(() => {
