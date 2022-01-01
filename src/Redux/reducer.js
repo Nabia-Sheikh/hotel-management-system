@@ -13,15 +13,6 @@ function formatData(items) {
   return tempItems;
 }
 
-//* Handle Change.
-
-// const handleChange = (event) => {
-//   this.setState(
-//     {
-//       [name]: value,
-//     },
-// };
-
 const reducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case READ: {
@@ -33,7 +24,6 @@ const reducer = (state = initialState, { type, payload }) => {
       let slug = rooms[0].slug;
       let maxPrice = Math.max(...rooms.map((item) => item.price));
       let maxSize = Math.max(...rooms.map((item) => item.size));
-
       return [
         {
           slug,

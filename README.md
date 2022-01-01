@@ -3,9 +3,16 @@
 
 This project is part of the Course of Web & Hybrid development which is taken at Grand Hackathon. 
 
-## Demo
+## Repository of Admin Panel
+
+https://github.com/Nabia-Sheikh/hotel-management-admin
+## Demo of Site
 
 https://hotel-management-by-nabia.netlify.app/
+
+## Demo of Admin Panel
+
+https://hotel-admin-by-nabia.netlify.app/
 
 ## Features
 

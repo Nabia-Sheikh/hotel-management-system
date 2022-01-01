@@ -1,6 +1,6 @@
 import { FILTER, READ } from "./actionTypes";
 
-export const ReadFromFirebase =(data) =>{
+export const ReadFromFirebase = (data) =>{
     return {
         type: READ,
         payload: {
