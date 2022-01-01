@@ -26,6 +26,8 @@ function App() {
   const [hotel, setHotels] = useState([]);
   const dispatch = useDispatch();
 
+  
+
   function readFromDatabase() {
     const dbRef = ref(db);
     get(child(dbRef, "/hotels"))
@@ -33,6 +35,8 @@ function App() {
         if (snapshot.exists()) {
           const data = snapshot.val();
           setHotels(data);
+          dispatch(ReadFromFirebase(data));
+
         } else {
           console.log("no data");
         }
@@ -40,7 +44,6 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
-    console.log("data Received!");
   }
 
   useEffect(() => {
@@ -50,11 +53,12 @@ function App() {
     start();
   }, []);
 
-  useEffect(() => {
-    if (hotel.length > 0) {
-      dispatch(ReadFromFirebase(hotel));
-    }
-  }, [dispatch, hotel]);
+  // useEffect(() => {
+  //   if (hotel) {
+  //     dispatch(ReadFromFirebase(hotel));
+  //     console.log(hotel);
+  //   }
+  // }, [hotel]);
 
   return (
     <div className="App">
@@ -76,7 +80,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path = "/booknow/:slug" element= {<ProtectedRoute><Booknow /></ProtectedRoute>} />
+            <Route
+              path="/booknow/:slug"
+              element={
+                <ProtectedRoute>
+                  <Booknow />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/contact-us" element={<Contact />} />
             <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<Signup />} />

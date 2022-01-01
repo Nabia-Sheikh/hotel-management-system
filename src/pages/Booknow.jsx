@@ -138,7 +138,7 @@ export default function Booknow() {
         totalPrice: daysLeft * price,
         days: daysLeft,
         capacity,
-
+        status : "Pending",
         id: uuid,
         refID: user.email,
       }).then(() => {

@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,8 +8,10 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+
 import { auth, db } from "../firebase";
-import { ref, set } from "firebase/database";
+
+import { child, get, ref, set } from "firebase/database";
 import { uid } from "uid";
 
 const userAuthContext = createContext();
@@ -18,16 +21,28 @@ export function UserAuthContextProvider({ children }) {
   const uuid = uid();
 
   function logIn(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
-  }
-  function signUp(email, password) {
-    return createUserWithEmailAndPassword(auth, email, password).then(
-      () => {
-        set(ref(db, `users/${uuid}`), {
-           email
-         });
+    get(child(ref(db), "/users")).then((data) => {
+      const userAuth = Object.values(data.val()).filter(
+        (item) => item.email === email && item.isAdmin === false
+      );
+      if (userAuth[0]) {
+        return signInWithEmailAndPassword(auth, email, password);
       }
-    );
+      alert("Please Sign in with User Account.");
+      // return signInWithEmailAndPassword(auth, email, password);
+    });
+  }
+
+  function signUp(email, password, name, number, id) {
+    return createUserWithEmailAndPassword(auth, email, password).then(() => {
+      set(ref(db, `users/${uuid}`), {
+        email,
+        name,
+        number,
+        id,
+        isAdmin: false,
+      });
+    });
   }
   function logOut() {
     return signOut(auth);

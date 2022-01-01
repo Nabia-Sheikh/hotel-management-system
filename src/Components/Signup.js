@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, Alert } from "react-bootstrap";
 import { useUserAuth } from "../contexts/UserAuthContext";
 import styled from "styled-components";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
+import { uid } from "uid";
+
 
 const Button = styled.button`
   background-color: blue;
@@ -22,7 +26,10 @@ const Button = styled.button`
 
 const Signup = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [value, setValue] = useState(0);
   const [error, setError] = useState("");
+  const id = uid();
   const [password, setPassword] = useState("");
   const { signUp } = useUserAuth();
   let navigate = useNavigate();
@@ -31,7 +38,7 @@ const Signup = () => {
     e.preventDefault();
     setError("");
     try {
-      await signUp(email, password);
+      await signUp(email, password , name , value , id);
       navigate("/");
     } catch (err) {
       setError(err.message);
@@ -44,6 +51,14 @@ const Signup = () => {
         <h2 className="mb-3">Create your account.</h2>
         {error && <Alert variant="danger">{error}</Alert>}
         <Form onSubmit={handleSubmit}>
+          <Form.Group className="mb-3" controlId="formbBasicText">
+            <Form.Control
+              type="text"
+              placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Control
               type="email"
@@ -51,6 +66,15 @@ const Signup = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </Form.Group>
+
+          <PhoneInput
+            defaultCountry="PK"
+            className="phoneInput"
+            id="number"
+            placeholder="Enter phone number"
+            value={value}
+            onChange={setValue}
+          />
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Control

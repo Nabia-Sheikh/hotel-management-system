@@ -5,6 +5,14 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { db } from "../firebase";
 import { Link } from "react-router-dom";
 import { useUserAuth } from "../contexts/UserAuthContext";
+import styled from "styled-components";
+
+const StatusTD = styled.td`
+  font-weight: bold;
+  color: ${(props) => (props.type === "Pending" ? "blue" : "")};
+  color: ${(props) => (props.type === "Accepted" ? "green" : "")};
+  color: ${(props) => (props.type === "Rejected" ? "red" : "")};
+`;
 
 const Bookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -23,7 +31,7 @@ const Bookings = () => {
         });
       }
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const deleteBooking = (dlt) => {
@@ -47,6 +55,7 @@ const Bookings = () => {
               <th>End Date</th>
               <th>Capactiy</th>
               <th>Price</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -59,11 +68,14 @@ const Bookings = () => {
                   <td>{booking.endDate}</td>
                   <td>{booking.capacity}</td>
                   <td>{booking.totalPrice}</td>
-                  <AiOutlineDelete
-                    color="red"
-                    style={{ cursor: "pointer", fontSize: "20px" }}
-                    onClick={() => deleteBooking(booking)}
-                  />
+                  <StatusTD type={booking.status}>{booking.status}</StatusTD>
+                  <td style={{textAlign : "center"}} >
+                    <AiOutlineDelete
+                      color="red"
+                      style={{ cursor: "pointer", fontSize: "20px" }}
+                      onClick={() => deleteBooking(booking)}
+                    />
+                  </td>
                 </>
               </tr>
             ))}

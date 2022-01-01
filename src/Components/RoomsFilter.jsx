@@ -23,7 +23,7 @@ const RoomsFilter = ({ rooms }) => {
   const pets = state[0].pets;
 
   const handleChange = (event) => {
-    dispatch(filteration(event));
+    dispatch(filteration(event)); 
   };
 
   //get unique type
